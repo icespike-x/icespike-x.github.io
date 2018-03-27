@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+	<meta charset='utf-8'>
+	<meta http-equiv="X-UA-Compatible" content="chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="/assets/css/style.css?v=c93572daa5470d572355c05ea45b1bef83996088">
+
+	<!-- Begin Jekyll SEO tag v2.4.0 -->
+	<title>CNGOODBOY | cngoodboy.github.io</title>
+	<meta name="generator" content="Jekyll v3.7.3" />
+	<meta property="og:title" content="CNGOODBOY" />
+	<meta property="og:locale" content="en_US" />
+	<link rel="canonical" href="https://www.cngoodboy.org/" />
+	<meta property="og:url" content="https://www.cngoodboy.org/" />
+	<meta property="og:site_name" content="cngoodboy.github.io" />
+	<script type="application/ld+json">
+{"name":"cngoodboy.github.io","@type":"WebSite","url":"https://www.cngoodboy.org/","headline":"CNGOODBOY","@context":"http://schema.org"}</script>
+	<!-- End Jekyll SEO tag -->
+</head>
+
+<body>
+
+	<header>
+		<div class="container">
+			<h1>cngoodboy.github.io</h1>
+			<h2></h2>
+
+			<section id="downloads">
+
+				<a href="https://github.com/cngoodboy/cngoodboy.github.io" class="btn btn-github">
+					<span class="icon"></span>View on GitHub</a>
+			</section>
+		</div>
+	</header>
+
+	<div class="container">
+		<section id="main_content">
+			<h1>A blog that is occupied by interesting mathematics</h1>
+			<script>
+				var xmlHttp = new XMLHttpRequest();
+				var maxPageId = 0;
+
+				xmlHttp.onreadystatechange = function () {
+					if (xmlHttp.readyState == 4) {
+						if (xmlHttp.status == 200) {
+							document.writeln("<ul>");
+							maxPageId = xmlHttp.responseText;
+							var reg = new RegExp("(^|&)page=([^&]*)(&|$)");
+							var pageId = 1;
+							var r = window.location.search.substr(1).match(reg);
+							if (r != null)
+								pageId = parseInt(unescape(r[2]));
+							pageId -= 1;
+							var successful = true;
+							var m_XmlHttp = new XMLHttpRequest();
+							var canNext = true;
+							m_XmlHttp.onreadystatechange = function () {
+								if (m_XmlHttp.readyState == 4) {
+									if (m_XmlHttp.status == 200) {
+										var responseText = m_XmlHttp.responseText;
+										var titleRegex = /<h1>.+?<\/h1>/;
+										var header = responseText.match(titleRegex)[1];
+										header = header.substr(4, header.length - 4 - 5);
+										header = "<h3>" + header + "</h3>";
+										document.writeln("<li><a href=\"./blog/" + i + ".md\">" +  header + "</a></li>")
+										canNext = true;
+									}
+									else {
+										successful = false;
+										canNext = true;
+									}
+								}
+							}
+							for (var i = pageId * 20; i < pageId * 20 + 20 && successful; i++) {
+								canNext = false;
+								m_XmlHttp.open("GET", "/blog/" + i + ".md", true);
+								m_XmlHttp.send(null);
+								while (!canNext);
+							}
+							document.writeln("</ul>");
+						}
+					}
+				}
+				xmlHttp.open("/blog/blogcount");
+			</script>
+		</section>
+	</div>
+
+
+</body>
+
+</html>
