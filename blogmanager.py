@@ -5,7 +5,7 @@ import io
 
 blog_info = dict(langth = 0, value=list())
 
-blogs = os.listdir("./blog")
+blogs = os.listdir("./blog/")
 
 blogs = list(filter(lambda x: x.endswith(".md"), blogs))
 
