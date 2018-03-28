@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+	<meta charset='utf-8'>
+	<meta http-equiv="X-UA-Compatible" content="chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="/assets/css/style.css?v=c93572daa5470d572355c05ea45b1bef83996088">
+
+	<!-- Begin Jekyll SEO tag v2.4.0 -->
+	<title>CNGOODBOY | cngoodboy.github.io</title>
+	<meta name="generator" content="Jekyll v3.7.3" />
+	<meta property="og:title" content="CNGOODBOY" />
+	<meta property="og:locale" content="en_US" />
+	<link rel="canonical" href="https://www.cngoodboy.org/" />
+	<meta property="og:url" content="https://www.cngoodboy.org/" />
+	<meta property="og:site_name" content="cngoodboy.github.io" />
+	<script type="application/ld+json">
+{"name":"cngoodboy.github.io","@type":"WebSite","url":"https://www.cngoodboy.org/","headline":"CNGOODBOY","@context":"http://schema.org"}</script>
+	<!-- End Jekyll SEO tag -->
+</head>
+
+<body>
+
+	<header>
+		<div class="container">
+			<h1>cngoodboy.github.io</h1>
+			<h2></h2>
+
+			<section id="downloads">
+
+				<a href="https://github.com/cngoodboy/cngoodboy.github.io" class="btn btn-github">
+					<span class="icon"></span>View on GitHub</a>
+			</section>
+		</div>
+	</header>
+
+	<div class="container">
+		<section id="main_content">
+			<h1>A blog that is occupied by interesting mathematics</h1>
+			<script>
+				var xmlHttp = new XMLHttpRequest();
+
+				document.writeln("<ul>");
+
+				xmlHttp.open("GET", "/blog/bloglist.json", false);
+				xmlHttp.send(null);
+
+				var bloglist = JSON.parse(xmlHttp.responseText);
+				var length = bloglist.length;
+				var blogs = bloglist.value;
+				var pageId = window.location.search.match(/page=\d+/i);
+				if (!pageId) {
+					window.location.href = "https://cngoodboy.github.io/blog.html?page=1";
+				}
+				else {
+					pageId = parseInt(pageId[0].substr(5, pageId[0].length));
+				}
+				pageId -= 1;
+				if (length < pageId * 20) {
+					window.location.href = "https://cngoodboy.github.io/blog.html?page=1";
+				}
+				for (var i = 0; i < 20; i++) {
+					if (pageId * 20 + i > length)
+						break;
+					var obj = blogs[pageId * 20 + i];
+					document.write("<li><a href=\"" + obj.href + "\">" + obj.title + "</a></li>");
+				}
+				document.writeln("</ul>");
+
+			</script>
+		</section>
+	</div>
+
+
+</body>
+
+</html>
