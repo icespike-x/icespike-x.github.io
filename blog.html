@@ -38,6 +38,7 @@
 	<div class="container">
 		<section id="main_content">
 			<h1>CNGOODBOY: A blog full of interesting maths.</h1>
+			<a href="https://cngoodboy.github.io/">back</a>
 			<script>
 				var xmlHttp = new XMLHttpRequest();
 
@@ -67,6 +68,12 @@
 					document.write("<li><a href=\"" + obj.href + "\" target=\"_blank\">" + obj.title + "</a></li>");
 				}
 				document.writeln("</ul>");
+				if ((pageId + 1) * 20 < length) {
+					document.write("<a href=\"https://cngoodboy.github.io/blog?page=" + (pageId + 1) + "\">OLDER</a>")
+				}
+				if (pageId > 1) {
+					document.write("<a href=\"https://cngoodboy.github.io/blog?page=" + (pageId - 1) + "\">NEWER</a>")
+				}
 
 			</script>
 		</section>
