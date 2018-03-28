@@ -38,54 +38,40 @@
 	<div class="container">
 		<section id="main_content">
 			<h1>A blog that is occupied by interesting mathematics</h1>
-			<script>
-				var xmlHttp = new XMLHttpRequest();
-				var maxPageId = 0;
+			<ul>
+				<script>
+					var xmlHttp = new XMLHttpRequest();
 
-				xmlHttp.onreadystatechange = function () {
-					if (xmlHttp.readyState == 4) {
-						if (xmlHttp.status == 200) {
-							document.writeln("<ul>");
-							maxPageId = xmlHttp.responseText;
-							var reg = new RegExp("(^|&)page=([^&]*)(&|$)");
-							var pageId = 1;
-							var r = window.location.search.substr(1).match(reg);
-							if (r != null)
-								pageId = parseInt(unescape(r[2]));
-							pageId -= 1;
-							var successful = true;
-							var m_XmlHttp = new XMLHttpRequest();
-							var canNext = true;
-							m_XmlHttp.onreadystatechange = function () {
-								if (m_XmlHttp.readyState == 4) {
-									if (m_XmlHttp.status == 200) {
-										var responseText = m_XmlHttp.responseText;
-										var titleRegex = /<h1>.+?<\/h1>/;
-										var header = responseText.match(titleRegex)[1];
-										header = header.substr(4, header.length - 4 - 5);
-										header = "<h3>" + header + "</h3>";
-										document.writeln("<li><a href=\"./blog/" + i + ".md\">" +  header + "</a></li>")
-										canNext = true;
-									}
-									else {
-										successful = false;
-										canNext = true;
-									}
+					xmlHttp.onreadystatechange = function () {
+						if (xmlHttp.readyState == 4) {
+							if (xmlHttp.status == 200) {
+								var bloglist = JSON.parse(xmlHttp.responseText);
+								var length = bloglist.length;
+								var blogs = bloglist.value;
+								var pageId = window.location.search.match(/page=\d+/i);
+								if (!pageId) {
+									window.location.href = "https://cngoodboy.github.io/blog.html?page=1";
+								}
+								else {
+									pageId = parseInt(pageId[0].substr(5, pageId[0].length));
+								}
+								pageId -= 1;
+								if (length < pageId * 20) {
+									window.location.href = "https://cngoodboy.github.io/blog.html?page=1";
+								}
+								for (var i = 0; i < 20; i++) {
+									if (pageId * 20 + i > length)
+										break;
+									var obj = blogs[pageId * 20 + i];
+									document.write("<li><a href=\"/blog" + obj.href + ".md\">" + obj.title + "</a></li>");
 								}
 							}
-							for (var i = pageId * 20; i < pageId * 20 + 20 && successful; i++) {
-								canNext = false;
-								m_XmlHttp.open("GET", "/blog/" + i + ".md", true);
-								m_XmlHttp.send(null);
-								while (!canNext);
-							}
-							document.writeln("</ul>");
 						}
 					}
-				}
-				xmlHttp.open("GET", "/blog/blogcount", true);
-				xmlHttp.send(null);
-			</script>
+					xmlHttp.open("GET", "/blog/bloglist.json", true);
+				</script>
+			</ul>
+
 		</section>
 	</div>
 
