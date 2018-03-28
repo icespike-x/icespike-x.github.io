@@ -38,41 +38,41 @@
 	<div class="container">
 		<section id="main_content">
 			<h1>A blog that is occupied by interesting mathematics</h1>
-			<ul>
-				<script>
-					var xmlHttp = new XMLHttpRequest();
+			<script>
+				var xmlHttp = new XMLHttpRequest();
 
-					xmlHttp.onreadystatechange = function () {
-						if (xmlHttp.readyState == 4) {
-							if (xmlHttp.status == 200) {
-								var bloglist = JSON.parse(xmlHttp.responseText);
-								var length = bloglist.length;
-								var blogs = bloglist.value;
-								var pageId = window.location.search.match(/page=\d+/i);
-								if (!pageId) {
-									window.location.href = "https://cngoodboy.github.io/blog.html?page=1";
-								}
-								else {
-									pageId = parseInt(pageId[0].substr(5, pageId[0].length));
-								}
-								pageId -= 1;
-								if (length < pageId * 20) {
-									window.location.href = "https://cngoodboy.github.io/blog.html?page=1";
-								}
-								for (var i = 0; i < 20; i++) {
-									if (pageId * 20 + i > length)
-										break;
-									var obj = blogs[pageId * 20 + i];
-									document.write("<li><a href=\"/blog/" + obj.href + "\">" + obj.title + "</a></li>");
-								}
+				document.writeln("<ul>");
+
+				xmlHttp.onreadystatechange = function () {
+					if (xmlHttp.readyState == 4) {
+						if (xmlHttp.status == 200) {
+							var bloglist = JSON.parse(xmlHttp.responseText);
+							var length = bloglist.length;
+							var blogs = bloglist.value;
+							var pageId = window.location.search.match(/page=\d+/i);
+							if (!pageId) {
+								window.location.href = "https://cngoodboy.github.io/blog.html?page=1";
 							}
+							else {
+								pageId = parseInt(pageId[0].substr(5, pageId[0].length));
+							}
+							pageId -= 1;
+							if (length < pageId * 20) {
+								window.location.href = "https://cngoodboy.github.io/blog.html?page=1";
+							}
+							for (var i = 0; i < 20; i++) {
+								if (pageId * 20 + i > length)
+									break;
+								var obj = blogs[pageId * 20 + i];
+								document.write("<li><a href=\"/blog" + obj.href + "\">" + obj.title + "</a></li>");
+							}
+							document.writeln("</ul>");
 						}
 					}
-					xmlHttp.open("GET", "/blog/bloglist.json", true);
-					xmlHttp.send(null)
-				</script>
-			</ul>
-
+				}
+				xmlHttp.open("GET", "/blog/bloglist.json", true);
+				xmlHttp.send(null);
+			</script>
 		</section>
 	</div>
 
