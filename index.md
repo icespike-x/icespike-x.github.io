@@ -1,4 +1,4 @@
 # CNGOODBOY
-一个被有趣的数学占领了的博客。
+一个充满了有趣的数学的博客。
 
-[BLOG](\blog.html)
+[BLOG](/blog/)
