@@ -181,3 +181,9 @@ function display_and_update()
     }
     context.putImageData(imageData, 0, 0);
 }
+
+function loop()
+{
+    setTimeout("loop()", 1000.0 / fps);
+    display_and_update();
+}
