@@ -159,7 +159,7 @@ function display_and_update() {
         }
     }
     for (var i = 0; i < star_count; i++) {
-        var pos = star_list[i].pos;
+        var pos = transform(star_list[i].pos, rotateMatrix(3, 0.5));
         var pix_pos = std2pixel(pos);
         var index = getIndex(pix_pos.x, pix_pos.y) + 3
         if (index < 0 || index + 3 >= size * size * 4)
@@ -173,3 +173,5 @@ function loop() {
     setTimeout("loop()", 1000.0 / fps);
     display_and_update();
 }
+
+loop()
