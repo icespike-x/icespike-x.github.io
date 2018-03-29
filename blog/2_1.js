@@ -23,16 +23,33 @@ function std2pixel(std)
 function rotateMatrix(degx, degy)
 {
     var matrixX = new Array(4);
+
     matrixX[0] = new Array(          1,          0,          0,          0);
     matrixX[1] = new Array(          0,  cos(degx),  sin(degx),          0);
     matrixX[2] = new Array(          0, -sin(degx),  cos(degx),          0);
     matrixX[3] = new Array(          0,          0,          0,          1);
 
     var matrixY = new Array(4);
+
     matrixY[0] = new Array(  cos(degy),          0, -sin(degy),          0);
     matrixY[1] = new Array(          0,          1,          0,          0);
     matrixY[2] = new Array(  sin(degy),          0,  cos(degy),          0);
     matrixY[3] = new Array(          0,          0,          0,          1);
+
+    matrix = new Array(4);
+    for (var i = 0; i < 4; i++)
+    {
+        matrix[i] = new Array(4);
+        for (var j = 0; j < 4; j++)
+        {
+            matrix[i][j] = 0;
+            for (var k = 0; k < 4; k++)
+            {
+                matrix[i][j] += matrixX[i][k] * matrixY[k][j];
+            }
+        }
+    }
+    return matrix;
 }
 
 function Star()
