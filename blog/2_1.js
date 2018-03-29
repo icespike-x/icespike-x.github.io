@@ -8,10 +8,14 @@ var context = canvas.getContext("2d");
 
 var star_count = 100000;
 
+var center_g = 0.3;
+
 var star_list = new Array(star_count);
 
 // 用于矩阵乘法的旋转，简化代码。
 var cos = Math.cos, sin = Math.sin;
+
+var fps = 30;
 
 // 显示用，这会将笛卡尔坐标转换成显示坐标。
 function std2pixel(std)
@@ -19,7 +23,7 @@ function std2pixel(std)
     return {x: (std.x + 1) / 2 * size, y: (std.y + 1) / 2 * size};
 }
 
-// 绘制用，生成旋转矩阵。
+// 生成旋转矩阵。
 function rotateMatrix(degx, degy)
 {
     var matrixX = new Array(4);
@@ -52,7 +56,7 @@ function rotateMatrix(degx, degy)
     return matrix;
 }
 
-// 绘制用，用于旋转。
+// 返回矩阵变换后的坐标。
 function transform(pos, matrix)
 {
     var vec = [new Array(pos.x, pos.y, pos.z, 0)];
@@ -73,4 +77,21 @@ function Star()
     // 三维效果
     this.pos = {x: 0, y: 0, z: 0};
     this.speed = {x: 0, y: 0, z: 0};
+    this.get_power = () => {
+        var distance = Math.sqrt(Math.pow(this.pos.x, 2) + Math.pow(this.pos.y, 2) + Math.pow(this.pos.z, 2));
+        return center_g / (distance * distance);
+    }
+    this.get_v = () => {
+        var distance = Math.sqrt(Math.pow(this.pos.x, 2) + Math.pow(this.pos.y, 2) + Math.pow(this.pos.z, 2));
+        return Math.sqrt(distance * this.get_power());
+    }
+    this.init = () => {
+        var d = Math.random() * 0.8 + 0.1
+        var r = Math.random() * Math.PI * 2 - Math.PI;
+        this.pos.x = cos(r) * d;
+        this.pos.y = sin(r) * d;
+        var v = this.get_v();
+        // 计算初始速度以进行圆周运动。
+        d = d + Math.PI;
+    }
 }
