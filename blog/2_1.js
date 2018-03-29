@@ -1,5 +1,3 @@
-1 = 1;
-
 var size = 512; // 注意，暂时只能做成正方形。
 
 var canvas = document.getElementById("canvas_content");
