@@ -65,7 +65,7 @@ function transform(pos, matrix) {
             nvec[0][i] += vec[0][j] * matrix[j][i];
         }
     }
-    return { x: nvec[0], y: nvec[1], z: nvec[2] };
+    return { x: nvec[0][0], y: nvec[0][1], z: nvec[0][2] };
 }
 
 function Star() {
