@@ -19,22 +19,22 @@ function std2pixel(std)
     return {x: (std.x + 1) / 2 * size, y: (std.y + 1) / 2 * size};
 }
 
-// 显示用，会旋转之后再显示。
+// 绘制用，生成旋转矩阵。
 function rotateMatrix(degx, degy)
 {
     var matrixX = new Array(4);
 
-    matrixX[0] = new Array(          1,          0,          0,          0);
-    matrixX[1] = new Array(          0,  cos(degx),  sin(degx),          0);
-    matrixX[2] = new Array(          0, -sin(degx),  cos(degx),          0);
-    matrixX[3] = new Array(          0,          0,          0,          1);
+    matrixX[0] = [          1,          0,          0,          0];
+    matrixX[1] = [          0,  cos(degx),  sin(degx),          0];
+    matrixX[2] = [          0, -sin(degx),  cos(degx),          0];
+    matrixX[3] = [          0,          0,          0,          1];
 
     var matrixY = new Array(4);
 
-    matrixY[0] = new Array(  cos(degy),          0, -sin(degy),          0);
-    matrixY[1] = new Array(          0,          1,          0,          0);
-    matrixY[2] = new Array(  sin(degy),          0,  cos(degy),          0);
-    matrixY[3] = new Array(          0,          0,          0,          1);
+    matrixY[0] = [  cos(degy),          0, -sin(degy),          0];
+    matrixY[1] = [          0,          1,          0,          0];
+    matrixY[2] = [  sin(degy),          0,  cos(degy),          0];
+    matrixY[3] = [          0,          0,          0,          1];
 
     matrix = new Array(4);
     for (var i = 0; i < 4; i++)
@@ -52,9 +52,25 @@ function rotateMatrix(degx, degy)
     return matrix;
 }
 
+// 绘制用，用于旋转。
+function transform(pos, matrix)
+{
+    var vec = [new Array(pos.x, pos.y, pos.z, 0)];
+    var nvec = [new Array(4)];
+    for (var i = 0; i < 4; i++)
+    {
+        nvec[0][i] = 0;
+        for (var j = 0; j < 4; j++)
+        {
+            nvec[0][i] += vec[0][j] * matrix[j][i];
+        }
+    }
+    return {x: nvec[0], y: nvec[1], z: nvec[2]};
+}
+
 function Star()
 {
     // 三维效果
-    this.position = {x: 0, y: 0, z: 0};
+    this.pos = {x: 0, y: 0, z: 0};
     this.speed = {x: 0, y: 0, z: 0};
 }
