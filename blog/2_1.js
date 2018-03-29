@@ -145,7 +145,7 @@ function Star()
 }
 
 // 初始化恒星列表
-for (var i = 0; i < star_list; i++)
+for (var i = 0; i < star_count; i++)
 {
     star_list[i] = new Star();
 }
