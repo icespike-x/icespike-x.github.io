@@ -19,10 +19,12 @@ var fps = 30;
 
 var speed_noise_rate = 0.05;
 
+var alpha_per_star = 16;
+
 // 显示用，这会将笛卡尔坐标转换成显示坐标。
 function std2pixel(std)
 {
-    return {x: (std.x + 1) / 2 * size, y: (std.y + 1) / 2 * size};
+    return {x: Math.floor((std.x + 1) / 2 * size), y: Math.floor((std.y + 1) / 2 * size)};
 }
 
 // 生成旋转矩阵。
@@ -88,7 +90,31 @@ function Star()
         return Math.sqrt(distance * this.get_power());
     }
     this.update = () => {
-        
+        // 更新坐标
+        this.pos.x += this.speed.x / fps;
+        this.pos.y += this.speed.y / fps;
+        this.pos.z += this.speed.z / fps;
+
+        // 更新速度
+        var normalized_pos = this.pos;
+        var distance = Math.sqrt(Math.pow(this.pos.x, 2) + Math.pow(this.pos.y, 2) + Math.pow(this.pos.z, 2));
+        normalized_pos.x *= distance;
+        normalized_pos.y *= distance;
+        normalized_pos.z *= distance;
+        var power = this.get_power();
+        var speed_update = normalized_pos;
+        speed_update.x *= power;
+        speed_update.y *= power;
+        speed_update.z *= power;
+        this.speed.x += speed_update.x;
+        this.speed.y += speed_update.y;
+        this.speed.z += speed_update.z;
+
+        // 检测越界
+        if (distance >= 10)
+        {
+            this.init();
+        }
     }
     this.init = () => {
         // 生成一个随机的初始位置
@@ -104,7 +130,7 @@ function Star()
         this.speed.y = sin(v_angle) * v;
 
         // 为速度添加噪声
-        var s_noise = v * speed_noise_rate;
+        var s_noise = v * speed_noise_rate * Math.random();
         var speed_r_xy = Math.random() * Math.PI * 2 - Math.PI;
         var speed_r_z = sin(Math.random() * Math.PI * 2 - Math.PI) * Math.PI * 2 - Math.PI;
         var speed_noise = {x: cos(speed_r_xy) * s_noise, y: sin(speed_r_xy) * s_noise, z: 0};
@@ -115,4 +141,43 @@ function Star()
         this.speed.y += speed_noise.y;
         this.speed.x += speed_noise.z;
     }
+    this.init();
+}
+
+// 初始化恒星列表
+for (var i = 0; i < star_list; i++)
+{
+    star_list[i] = new Star();
+}
+
+// 处理一帧的信息
+function display_and_update()
+{
+    // 更新。
+    for (var i = 0; i < star_count; i++)
+    {
+        star_list[i].update();
+    }
+
+    // 绘制所有恒星
+    var imageData = context.createImageData(size, size);
+    var getIndex = (x , y) => {
+        return (x * size + y) * 4;
+    }
+    for (var i = 0; i < size; i++)
+    {
+        for (var j = 0; j < size; j++)
+        {
+            var index = getIndex(i, j);
+            imageData.data[index] = imageData.data[index + 1] = imageData.data[index + 2] = 255;
+            imageData.data[index + 3] = 0;
+        }
+    }
+    for (var i = 0; i < star_count; i++)
+    {
+        var pos = star_list[i].pos;
+        var pix_pos = std2pixel(pos);
+        imageData.data[getIndex(pix_pos.x, pix_pos.y) + 3] += alpha_per_star;
+    }
+    context.putImageData(imageData, 0, 0);
 }
