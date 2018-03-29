@@ -17,6 +17,8 @@ var cos = Math.cos, sin = Math.sin;
 
 var fps = 30;
 
+var speed_noise_rate = 0.05;
+
 // 显示用，这会将笛卡尔坐标转换成显示坐标。
 function std2pixel(std)
 {
@@ -85,13 +87,32 @@ function Star()
         var distance = Math.sqrt(Math.pow(this.pos.x, 2) + Math.pow(this.pos.y, 2) + Math.pow(this.pos.z, 2));
         return Math.sqrt(distance * this.get_power());
     }
+    this.update = () => {
+        
+    }
     this.init = () => {
+        // 生成一个随机的初始位置
         var d = Math.random() * 0.8 + 0.1
         var r = Math.random() * Math.PI * 2 - Math.PI;
         this.pos.x = cos(r) * d;
         this.pos.y = sin(r) * d;
-        var v = this.get_v();
+
         // 计算初始速度以进行圆周运动。
-        d = d + Math.PI;
+        var v = this.get_v();
+        var v_angle = d - Math.PI / 2;
+        this.speed.x = cos(v_angle) * v;
+        this.speed.y = sin(v_angle) * v;
+
+        // 为速度添加噪声
+        var s_noise = v * speed_noise_rate;
+        var speed_r_xy = Math.random() * Math.PI * 2 - Math.PI;
+        var speed_r_z = sin(Math.random() * Math.PI * 2 - Math.PI) * Math.PI * 2 - Math.PI;
+        var speed_noise = {x: cos(speed_r_xy) * s_noise, y: sin(speed_r_xy) * s_noise, z: 0};
+        speed_noise.z = sin(speed_r_z);
+        speed_noise.x *= cos(speed_r_z);
+        speed_noise.y *= cos(speed_r_z);
+        this.speed.x += speed_noise.x;
+        this.speed.y += speed_noise.y;
+        this.speed.x += speed_noise.z;
     }
 }
