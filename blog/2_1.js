@@ -6,7 +6,7 @@ canvas.width = canvas.height = size;
 
 var context = canvas.getContext("2d");
 
-var star_count = 100000;
+var star_count = 50000;
 
 var center_g = 0.3;
 
