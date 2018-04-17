@@ -1,6 +1,7 @@
 # CNGOODBOY: A blog full of interesting maths.
 [BACK TO HOME](https://cngoodboy.github.io)
 <script>
+    
 	var xmlHttp = new XMLHttpRequest();
 
 	document.writeln("<ul>");
@@ -35,4 +36,5 @@
 	if (pageId > 1) {
 		document.write("<a href=\"https://cngoodboy.github.io/blog?page=" + (pageId - 1) + "\">NEWER</a>")
 	}
+
 </script>
