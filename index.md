@@ -1,4 +1,4 @@
-# CNGOODBOY
-一个充满了有趣的数学的博客。
+# IceSpike
+欢迎来到IceSpike的个人网站！
 
 [BLOG](/blog)
