@@ -16,7 +16,8 @@ blog_list = []
 for i in blogs:
     blog_dict = {}
     with open("./blog/" + i, encoding="utf-8") as f:
-        blog_dict['title'] = f.readline()[2:-1]
+        f.readline()
+        blog_dict['title'] = f.readline()[5:-5]
     blog_dict['href'] = "./blog/" + i[:-3]
     blog_info['value'].append(blog_dict)
 

@@ -16,6 +16,7 @@ weekday = ["一", "二", "三", "四", "五", "六", "日"]
 
 with open(os.path.join("./blog/", sys.argv[1]), 'w', encoding="utf-8") as f:
     f.write(formated_mark)
+    f.write("<!--" + origin_file[0][2:] + "-->")
     f.write("""<head>
         <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
         <script type="text/x-mathjax-config">
