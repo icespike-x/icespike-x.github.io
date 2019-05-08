@@ -29,9 +29,7 @@ with open(os.path.join("./blog/", sys.argv[1]), 'w', encoding="utf-8") as f:
         </script>
     </head>""")
     f.write("<link rel=\"stylesheet\" type=\"text/css\" href=\"styles/fonts.css\">\n")
-    f.write("<div id=\"blog_content\">\r\n")
     f.write(orignal[0])
     currentTime = time.localtime()
     f.write("%d/%d/%d 星期%s %2d:%2d\n" % (currentTime.tm_year, currentTime.tm_mon, currentTime.tm_mday, weekday[currentTime.tm_wday], currentTime.tm_hour, currentTime.tm_min))
     f.write(''.join(orignal[1:]))
-    f.write("</div>\n")
