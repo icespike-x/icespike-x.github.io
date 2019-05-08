@@ -28,7 +28,7 @@ with open(os.path.join("./blog/", sys.argv[1]), 'w', encoding="utf-8") as f:
             });
         </script>
     </head>""")
-    f.write("<link rel=\"stylesheet\" type=\"text/css\" href=\"styles/fonts.css\">\n")
+    f.write("<link rel=\"stylesheet\" type=\"text/css\" href=\"styles/basic_styles.css\">\n")
     f.write("<a href=\"cngoodboy.github.io/blog.html\">返回</a>\r\n")
     f.write(orignal[0])
     currentTime = time.localtime()
