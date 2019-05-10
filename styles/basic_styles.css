@@ -52,7 +52,7 @@ body
 /* operator */
 .highlight .o,.highlight .ow
 {
-    color:#56b6c2
+    color:#56b6c2 !important
 }
 
 .highlight .p,.highlight .pi
@@ -79,7 +79,7 @@ body
 /* keyword */
 .highlight .k,.highlight .kn,.highlight .kp,.highlight .kr,.highlight .kv
 {
-    color:#c678dd
+    color:#c678dd !important
     
 }
 
@@ -121,7 +121,7 @@ body
 /* Numbers */
 .highlight .m,.highlight .mf,.highlight .mh,.highlight .mi,.highlight .il,.highlight .mo,.highlight .mb,.highlight .mx
 {
-    color:#d19a66
+    color:#d19a66 !important
 }
 
 .highlight .ss
