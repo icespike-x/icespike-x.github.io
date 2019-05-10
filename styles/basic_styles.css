@@ -15,7 +15,8 @@ body
 
 .highlight
 {
-    color:#d0d0d0
+    color:#d0d0d0;
+    font-family: 'Fira Code', 'Courier New', Courier, monospace
 }
 
 .highlight table td
