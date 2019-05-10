@@ -88,9 +88,10 @@ body
     color:#d28445
 }
 
+/* string */
 .highlight .s,.highlight .sb,.highlight .sc,.highlight .sd,.highlight .s2,.highlight .sh,.highlight .sx,.highlight .s1
 {
-    color:#90a959
+    color:#98c379 !important
 }
 
 .highlight .sr
@@ -108,9 +109,10 @@ body
     color:#f4bf75
 }
 
+/* variable */
 .highlight .n, .highlight .nb
 {
-    color: #e06c75;
+    color: #e06c75 !important
 }
 
 .highlight .na
@@ -297,7 +299,7 @@ code.highlighter-rouge
     border:1px solid rgba(255,255,255,0.15);
     padding:0px 3px;
     margin:0px -3px;
-    color:#aa759f;
+    color:#e06c75 !important;
     border-radius:2px
 }
 
