@@ -1,0 +1,26 @@
+body
+{
+    margin: 0;
+    background-color: #B0BAD9;
+    color: black;
+    font-family: monospace;
+}
+
+div.header
+{
+    padding: 20px;
+    background-color: #0460D9;
+    color: white;
+}
+
+div.content
+{
+    margin-left: 25%;
+    margin-right: 25%;
+
+    background-color: #F2EBEC;
+    color: black
+}
+
+/* #07B0F2 for floating box */
+/* #558ED9 */
