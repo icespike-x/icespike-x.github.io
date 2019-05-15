@@ -11,12 +11,15 @@ div.header
     padding: 20px;
     background-color: #0460D9;
     color: white;
+    text-align: center;
 }
 
 div.content
 {
     margin-left: 25%;
     margin-right: 25%;
+
+    padding: 20px;
 
     background-color: #F2EBEC;
     color: black
