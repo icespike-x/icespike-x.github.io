@@ -18,7 +18,7 @@ for i in blogs:
     with open("./blog/" + i, encoding="utf-8") as f:
         f.readline()
         blog_dict['title'] = f.readline()[5:-5]
-    blog_dict['href'] = "./blog/" + i[:-3]
+    blog_dict['href'] = "/blog/" + i[:-3]
     blog_info['value'].append(blog_dict)
 
 blog_info['value'].reverse()
