@@ -30,7 +30,7 @@ with open(os.path.join("./blog/", sys.argv[1]), 'w', encoding="utf-8") as f:
         <title>%s</title>
         <link rel=\"stylesheet\" type=\"text/css\" href=\"/styles/basic_styles.css\">
     </head>""" % origin_file[0][2:])
-    f.write("<a href=\"cngoodboy.github.io/blog.html\">返回</a>\r\n")
+    f.write("<a href=\"/blog\">返回</a>\r\n")
     f.write(orignal[0])
     currentTime = time.localtime()
     f.write("%d/%d/%d 星期%s %2d:%2d\n" % (currentTime.tm_year, currentTime.tm_mon, currentTime.tm_mday, weekday[currentTime.tm_wday], currentTime.tm_hour, currentTime.tm_min))
